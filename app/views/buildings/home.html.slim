@@ -1,5 +1,6 @@
 h1 Home
 .container-fluid
+  = render partial: 'search_form', locals: { search_url: home_buildings_path }
   .row
     = paginate @builds
     - @builds.each do |build|

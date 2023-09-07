@@ -4,11 +4,13 @@ class BuildingsController < ApplicationController
   before_action :authenticate_user!, except: [:home, :show]
 
   def index
-    @builds = Building.where(user_id: current_user.id).page(params[:page]).per(8)
+    @q = Building.where(user_id: current_user.id).ransack(params[:q])
+    @builds = @q.result(distinct: true).page(params[:page]).per(8)
   end
 
   def home
-    @builds = Building.all.page(params[:page]).per(8)
+    @q = Building.ransack(params[:q])
+    @builds = @q.result(distinct: true).page(params[:page]).per(8)
   end
 
   def new

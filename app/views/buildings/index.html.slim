@@ -1,6 +1,7 @@
 h1 Buildings
 = link_to "Nuevo Edificio",new_building_path, class: 'btn btn-primary'
 .container-fluid
+  = render partial: 'search_form', locals: { search_url: buildings_path }
   .row
     = paginate @builds
     - @builds.each do |build|

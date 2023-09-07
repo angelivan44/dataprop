@@ -1,0 +1,46 @@
+= search_form_for @q,url: search_url, html: { class: 'my-4' } do |f|
+  .form-row
+    .col-md-3
+      .form-group
+        = f.label :transaction_type_cont, 'Tipo de transacción'
+        = f.select :transaction_type_cont, [["Venta", "Venta"], ["Arriendo", "Arriendo"]], { include_blank: 'Selecciona una opción' }, class: 'form-control'
+
+    .col-md-3
+      .form-group
+        = f.label :price_gteq, 'Precio mínimo'
+        = f.number_field :price_gteq, class: 'form-control', step: 0.01
+
+    .col-md-3
+      .form-group
+        = f.label :price_lteq, 'Precio máximo'
+        = f.number_field :price_lteq, class: 'form-control', step: 0.01
+
+    .col-md-3
+      .form-group
+        = f.label :address_cont, 'Dirección'
+        = f.search_field :address_cont, class: 'form-control'
+
+  .form-row
+    .col-md-3
+      .form-group
+        = f.label :area_sq_meter_gteq, 'Área mínima (m^2)'
+        = f.number_field :area_sq_meter_gteq, class: 'form-control', step: 0.01
+
+    .col-md-3
+      .form-group
+        = f.label :area_sq_meter_lteq, 'Área máxima (m^2)'
+        = f.number_field :area_sq_meter_lteq, class: 'form-control', step: 0.01
+
+    .col-md-3
+      .form-group
+        = f.label :bedroom_count_eq, 'Número de habitaciones'
+        = f.number_field :bedroom_count_eq, class: 'form-control', min: 0
+
+    .col-md-3
+      .form-group
+        = f.label :bathroom_count_eq, 'Número de baños'
+        = f.number_field :bathroom_count_eq, class: 'form-control', min: 0
+
+  .form-row.justify-content-center
+    = f.submit 'Buscar', class: 'btn btn-primary'
+
