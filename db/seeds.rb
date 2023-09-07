@@ -35,6 +35,7 @@ User.all.each do |user|
     3.times do
       photo = Photo.create!(
         priority: Faker::Number.between(from: 1, to: 10),
+        primary: false,
         building_id: building.id
       )
 

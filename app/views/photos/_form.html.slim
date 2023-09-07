@@ -1,20 +1,30 @@
-= form_with(model: [@building, @photo]) do |form|
+= form_with(model: [@building, @photo], class: 'mb-3') do |form|
   - if @photo.errors.any?
-    #error_explanation
-      h2
+    .alert.alert-danger
+      h4.alert-heading
         = pluralize(@photo.errors.count, "error")
         |  prohibited this photo from being saved:
       ul
         - @photo.errors.full_messages.each do |message|
           li= message
 
-  .field
-    = form.label :priority
-    = form.number_field :priority
+  .form-group
+    = form.label :priority, class: 'form-label'
+    = form.number_field :priority, class: 'form-control'
+  .form-group
+    = form.label :primary, class: 'form-check-label'
+    .form-check
+      = form.check_box :primary, class: 'form-check-input'
+  .form-group
+    = form.label :image, class: 'form-label'
+    = form.file_field :image, id: 'image-input', class: 'form-control mt-2'
+    .img-preview.mt-3
+      - if form.object.image.attached?
+        = image_tag form.object.image, id: 'image-preview', class: 'img-fluid'
+      - else
+        img#image-preview.img-fluid[style="display:none;"]
 
-  .field
-    = form.label :image
-    = form.file_field :image
-
-  .actions
-    = form.submit
+  .actions.mt-4
+    = form.submit 'Guardar', class: 'btn btn-primary'
+- unless action_name == "new"
+  = button_to 'Eliminar', building_photo_path(@building, @photo), method: :delete, class: 'btn btn-danger ml-2'

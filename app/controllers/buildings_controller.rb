@@ -55,6 +55,14 @@ class BuildingsController < ApplicationController
   end
 
   def building_params
-    params.require(:building).permit(:address, :area_sq_meter, :price, :transaction_type, :bedroom_count, :bathroom_count )
+    params.require(:building).permit(
+      :address,
+      :area_sq_meter,
+      :price,
+      :transaction_type,
+      :bedroom_count,
+      :bathroom_count,
+      photos_attributes: [:id, :image, :_destroy]
+    )
   end
 end

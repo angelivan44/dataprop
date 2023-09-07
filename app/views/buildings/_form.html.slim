@@ -6,46 +6,53 @@
           .alert.alert-danger
             h4
               = pluralize(building.errors.count, "error")
-              |  prohibited this building from being saved:
+              |  impidieron guardar este edificio:
             ul
               - building.errors.full_messages.each do |message|
                 li= message
 
         .mb-3
-          = form.label :address, class: 'form-label'
+          = form.label :address, 'Dirección', class: 'form-label'
           = form.text_field :address, class: 'form-control'
 
         .mb-3
-          = form.label :area_sq_meter, class: 'form-label'
+          = form.label :area_sq_meter, 'Área en Metros Cuadrados', class: 'form-label'
           = form.number_field :area_sq_meter, step: 0.01, class: 'form-control'
 
         .mb-3
-          = form.label :price, class: 'form-label'
+          = form.label :price, 'Precio', class: 'form-label'
           = form.number_field :price, step: 0.01, class: 'form-control'
 
         .mb-3
-          = form.label :transaction_type, class: 'form-label'
+          = form.label :transaction_type, 'Tipo de Transacción', class: 'form-label'
           = form.select :transaction_type, ['Venta', 'Arriendo'], {}, class: 'form-select'
 
         .mb-3
-          = form.label :bedroom_count, 'Number of Bedrooms', class: 'form-label'
+          = form.label :bedroom_count, 'Número de Habitaciones', class: 'form-label'
           = form.number_field :bedroom_count, min: 0, class: 'form-control'
 
         .mb-3
-          = form.label :bathroom_count, 'Number of Bathrooms', class: 'form-label'
+          = form.label :bathroom_count, 'Número de Baños', class: 'form-label'
           = form.number_field :bathroom_count, min: 0, class: 'form-control'
 
-        #photos.mb-3
-          = form.fields_for :photos do |photo_form|
-            .mb-3
-              = photo_form.label :image, class: 'form-label'
-              = photo_form.file_field :image, class: 'form-control'
-              - if photo_form.object.image.attached?
-                = image_tag photo_form.object.image, width: 100, class: 'mt-2'
-              .mt-2
-                = photo_form.check_box :_destroy, class: 'form-check-input'
-                = photo_form.label :_destroy, 'Eliminar imagen', class: 'form-check-label'
+        #photos.mb-3 data-controller="photo-upload"
+          .photo-fields data-photo-upload-target="photoFields"
+            - building.photos.each do |photo|
+              .mb-3
+                = image_tag photo.image, width: 100, class: 'mt-2'
+                = link_to 'Editar', edit_building_photo_path(@building, photo), class: 'btn'
 
-        = link_to "new", new_building_photo_path(@building), class: 'btn btn-info mb-3'
+            - 1.times do # Puedes cambiar el '3' por la cantidad de campos que desees mostrar
+              .mb-3.photo-input data-photo-upload-target="photoInput"
+                = form.fields_for :photos, building.photos.build do |photo_form|
+                  = photo_form.label :image, 'Imagen', class: 'form-label'
+                  = photo_form.file_field :image, class: 'form-control'
+                  - if photo_form.object.image.attached?
+                    = image_tag photo_form.object.image, width: 100, class: 'mt-2'
+                  = link_to 'Eliminar', '#', class: 'remove-photo btn btn-danger mt-2', data: { action: "click->photo-upload#removePhotoField" }
+
+          = link_to 'Agregar otra foto', '#', id: 'add-photo', data: { action: "click->photo-upload#addPhotoField" }, class: 'btn btn-info'
+
+
         .actions
           = form.submit 'Guardar', class: 'btn btn-primary'

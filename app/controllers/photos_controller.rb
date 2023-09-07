@@ -23,6 +23,7 @@ class PhotosController < ApplicationController
   end
 
   def update
+    change_primary if params[:photo][:primary] == "1"
     if @photo.update(photo_params)
       redirect_to building_photos_path(@building), notice: 'Photo was successfully updated.'
     else
@@ -46,10 +47,17 @@ class PhotosController < ApplicationController
   end
 
   def photo_params
-    params.require(:photo).permit(:priority, :image)
+    params.require(:photo).permit(:priority, :image, :primary)
   end
 
   def set_building
     @building = Building.find(params[:building_id])
+  end
+
+  def change_primary
+    old_image_primary = @building.photos.find_by(primary: true)
+    return if old_image_primary.id == params[:id]
+    old_image_primary.primary = false
+    old_image_primary.save
   end
 end
