@@ -3,8 +3,3 @@ h1 Home
   .row
     - @builds.each do |build|
       = render partial: "card", locals: { building: build }
-
-- if current_user
-  = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'button-class'
--else
-  = link_to "login", new_user_session_path

@@ -1,29 +1,53 @@
-h1 Building Details
+.container.my-4
+  h1 Building Details
 
-p
-  strong Address:
-  = @building.address
+  .row
+    .col-md-6
+      p
+        strong Address:
+        = @building.address
 
-p
-  strong Area (m²):
-  = @building.area_sq_meter
+      p
+        strong Area (m²):
+        = @building.area_sq_meter
 
-p
-  strong Price ($):
-  = @building.price
+      p
+        strong Price ($):
+        = @building.price
 
-p
-  strong transaction_type:
-  = @building.transaction_type
+      p
+        strong Transaction Type:
+        = @building.transaction_type
 
-p
-  strong bedroom_count :
-  = @building.bedroom_count
+      p
+        strong Bedroom Count:
+        = @building.bedroom_count
 
-p
-  strong bathroom_count :
-  = @building.bathroom_count
+      p
+        strong Bathroom Count:
+        = @building.bathroom_count
 
-= link_to 'Edit', edit_building_path(@building)
-| |
-= link_to 'Back', buildings_path
+      = link_to 'Edit', edit_building_path(@building), class: 'btn btn-primary mr-2'
+      = link_to 'Back', buildings_path, class: 'btn btn-secondary'
+
+    .col-md-6
+      - if @building.photos.any?
+        h3 Photos
+        #buildingPhotosCarousel.carousel.slide[data-bs-ride="carousel" style="height: 400px;"]
+          .carousel-inner
+            - @building.photos.each_with_index do |photo, index|
+              - if photo.image.attached?
+                .carousel-item class=(index.zero? ? 'active' : '') style="height: 100%; overflow: hidden; position: relative;"
+                  = image_tag photo.image.variant(resize_to_fill: [1000, 600]), alt: "Building Photo", class: 'd-block w-100'
+          - if @building.photos.size > 1
+            button.carousel-control-prev[type="button" data-bs-target="#buildingPhotosCarousel" data-bs-slide="prev"]
+              span.carousel-control-prev-icon[aria-hidden="true"]
+              span.visually-hidden Previous
+            button.carousel-control-next[type="button" data-bs-target="#buildingPhotosCarousel" data-bs-slide="next"]
+              span.carousel-control-next-icon[aria-hidden="true"]
+              span.visually-hidden Next
+      - else
+        p No photos available for this building.
+
+
+
