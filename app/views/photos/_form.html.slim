@@ -1,12 +1,13 @@
 = form_with(model: [@building, @photo], class: 'mb-3') do |form|
   - if @photo.errors.any?
-    .alert.alert-danger
-      h4.alert-heading
-        = pluralize(@photo.errors.count, "error")
-        |  prohibited this photo from being saved:
-      ul
-        - @photo.errors.full_messages.each do |message|
-          li= message
+    div[style="color: red"]
+      h2
+        = pluralize(format.errors.count, "error")
+        |  prohibited this format from being saved:
+    ul
+      - format.errors.each do |error|
+        li
+          = error.full_message
 
   .form-group
     = form.label :priority, class: 'form-label'
@@ -25,6 +26,7 @@
         img#image-preview.img-fluid[style="display:none;"]
 
   .actions.mt-4
+    = link_to 'Atrás', edit_building_path(@building), class: 'btn btn-secondary mr-2'
     = form.submit 'Guardar', class: 'btn btn-primary'
 - unless action_name == "new"
   = button_to 'Eliminar', building_photo_path(@building, @photo), method: :delete, class: 'btn btn-danger ml-2'

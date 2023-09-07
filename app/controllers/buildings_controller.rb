@@ -17,9 +17,11 @@ class BuildingsController < ApplicationController
 
   def create
     @building = Building.new(building_params)
-    @building.user = User.first
+    @building.user = current_user
     if @building.save
-      redirect_to buildings_path(@building)
+      redirect_to @building, notice: 'Edificio creado con éxito.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
