@@ -1,0 +1,18 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  = link_to root_path, class: 'navbar-brand' do
+    = image_tag 'logo_sin_fondo.png'
+  button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"]
+    span.navbar-toggler-icon
+
+  #navbarNav.collapse.navbar-collapse.justify-content-end
+    ul.navbar-nav
+      - if current_user
+        li.nav-item.active.d-flex.align-items-center
+          = link_to 'My Buildings', buildings_path, class: 'nav-link'
+          = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-link ml-2'
+      - else
+        li.nav-item
+          = link_to 'Login', new_user_session_path, class: 'nav-link'
+        li.nav-item
+          = link_to 'Register', new_user_registration_path, class: 'nav-link'
+'
