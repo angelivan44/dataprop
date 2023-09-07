@@ -1,0 +1,25 @@
+.col-12.col-sm-6.col-lg-3
+  = link_to building_path(building) do
+    .single_advisor_profile
+      .advisor_thumb
+        - if building.photos.any? && building.photos.first.image.attached?
+          = image_tag building.photos.first.image.variant(resize_to_fill: [300, 300]).processed, class: "card-img-top carousel-property-image", alt: "Building Image"
+        - else
+          = image_tag "https://pruebas-dataprop-cl.s3.amazonaws.com/photos/images/000/018/343/medium/Francisco_Javier.jpg?1691122126", class: "card-img-top carousel-property-image", alt: "Default Image"
+          .card-body.property-landing-card
+        .social-info
+          a href=building_path(building)
+            i.fa.fa-home
+      .single_advisor_details_info
+        h6
+          = building.address
+        p.designation
+          = building.transaction_type
+        p
+          = "M2 Totales: #{building.area_sq_meter}"
+        p
+          = "Habitaciones: #{building.bedroom_count}"
+        p
+          = "Baños: #{building.bathroom_count}"
+        p
+          = "Precio: #{building.price}"

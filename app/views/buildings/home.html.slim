@@ -1,18 +1,8 @@
 h1 Home
-
-table
-  thead
-    tr
-      th Address
-      th Area (m²)
-      th Price ($)
-      th Actions
-  tbody
+.container-fluid
+  .row
     - @builds.each do |build|
-      tr
-        td= build.address
-        td= build.area_sq_meter
-        td= build.price
+      = render partial: "card", locals: { building: build }
 
 - if current_user
   = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'button-class'
