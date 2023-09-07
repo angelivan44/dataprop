@@ -1,4 +1,22 @@
-p
-  = @buildings
-h1
-  | test slim
+h1 Buildings
+
+table
+  thead
+    tr
+      th Address
+      th Area (m²)
+      th Price ($)
+      th Actions
+  tbody
+    - @builds.each do |build|
+      tr
+        td= build.address
+        td= build.area_sq_meter
+        td= build.price
+        td
+          = link_to 'Show', building_path(build)
+          | |
+          = link_to 'Edit', edit_building_path(build)
+          | |
+          = button_to 'Delete', building_path(build), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-class'
+= link_to 'New Building', new_building_path

@@ -1,0 +1,36 @@
+= form_with(model: building ) do |form|
+  - if building.errors.any?
+    #error_explanation
+      h2
+        = pluralize(building.errors.count, "error")
+        |  prohibited this build from being saved:
+      ul
+        - building.errors.full_messages.each do |message|
+          li= message
+
+  .field
+    = form.label :address
+    = form.text_field :address
+
+  .field
+    = form.label :area_sq_meter
+    = form.number_field :area_sq_meter, step: 0.01
+
+  .field
+    = form.label :price
+    = form.number_field :price, step: 0.01
+
+  .field
+    = form.label :transaction_type
+    = form.select :transaction_type, ['Venta', 'Arriendo']
+
+  .field
+    = form.label :bedroom_count, 'Number of Bedrooms'
+    = form.number_field :bedroom_count, min: 0
+
+  .field
+    = form.label :bathroom_count, 'Number of Bathrooms'
+    = form.number_field :bathroom_count, min: 0
+
+  .actions
+    = form.submit

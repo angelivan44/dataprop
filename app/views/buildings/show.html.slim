@@ -1,0 +1,29 @@
+h1 Building Details
+
+p
+  strong Address:
+  = @building.address
+
+p
+  strong Area (m²):
+  = @building.area_sq_meter
+
+p
+  strong Price ($):
+  = @building.price
+
+p
+  strong transaction_type:
+  = @building.transaction_type
+
+p
+  strong bedroom_count :
+  = @building.bedroom_count
+
+p
+  strong bathroom_count :
+  = @building.bathroom_count
+
+= link_to 'Edit', edit_building_path(@building)
+| |
+= link_to 'Back', buildings_path
