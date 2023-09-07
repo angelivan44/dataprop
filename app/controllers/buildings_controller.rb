@@ -1,7 +1,7 @@
 class BuildingsController < ApplicationController
   before_action :set_building, only: [:show, :edit,  :update, :destroy]
   before_action :set_photos, only: [:edit, :show]
-  before_action :authenticate_user!, except: :home
+  before_action :authenticate_user!, except: [:home, :show]
 
   def index
     @builds = Building.where(user_id: current_user.id)

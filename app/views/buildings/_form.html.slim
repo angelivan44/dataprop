@@ -1,46 +1,51 @@
-= form_with(model: building) do |form|
-  - if building.errors.any?
-    #error_explanation
-      h2
-        = pluralize(building.errors.count, "error")
-        |  prohibited this build from being saved:
-      ul
-        - building.errors.full_messages.each do |message|
-          li= message
+.container.mt-5
+  .row
+    .col-md-8.offset-md-2
+      = form_with(model: building, class: 'mt-4') do |form|
+        - if building.errors.any?
+          .alert.alert-danger
+            h4
+              = pluralize(building.errors.count, "error")
+              |  prohibited this building from being saved:
+            ul
+              - building.errors.full_messages.each do |message|
+                li= message
 
-  .field
-    = form.label :address
-    = form.text_field :address
+        .mb-3
+          = form.label :address, class: 'form-label'
+          = form.text_field :address, class: 'form-control'
 
-  .field
-    = form.label :area_sq_meter
-    = form.number_field :area_sq_meter, step: 0.01
+        .mb-3
+          = form.label :area_sq_meter, class: 'form-label'
+          = form.number_field :area_sq_meter, step: 0.01, class: 'form-control'
 
-  .field
-    = form.label :price
-    = form.number_field :price, step: 0.01
+        .mb-3
+          = form.label :price, class: 'form-label'
+          = form.number_field :price, step: 0.01, class: 'form-control'
 
-  .field
-    = form.label :transaction_type
-    = form.select :transaction_type, ['Venta', 'Arriendo']
+        .mb-3
+          = form.label :transaction_type, class: 'form-label'
+          = form.select :transaction_type, ['Venta', 'Arriendo'], {}, class: 'form-select'
 
-  .field
-    = form.label :bedroom_count, 'Number of Bedrooms'
-    = form.number_field :bedroom_count, min: 0
+        .mb-3
+          = form.label :bedroom_count, 'Number of Bedrooms', class: 'form-label'
+          = form.number_field :bedroom_count, min: 0, class: 'form-control'
 
-  .field
-    = form.label :bathroom_count, 'Number of Bathrooms'
-    = form.number_field :bathroom_count, min: 0
+        .mb-3
+          = form.label :bathroom_count, 'Number of Bathrooms', class: 'form-label'
+          = form.number_field :bathroom_count, min: 0, class: 'form-control'
 
-  #photos
-    = form.fields_for :photos do |photo_form|
-      .photo-field
-        = photo_form.label :image
-        = photo_form.file_field :image
-        - if photo_form.object.image.attached?
-          = image_tag photo_form.object.image, width: 100
-        = photo_form.check_box :_destroy
-        = photo_form.label :_destroy, 'Eliminar imagen'
-  = link_to "new" , new_building_photo_path(@building)
-  .actions
-    = form.submit
+        #photos.mb-3
+          = form.fields_for :photos do |photo_form|
+            .mb-3
+              = photo_form.label :image, class: 'form-label'
+              = photo_form.file_field :image, class: 'form-control'
+              - if photo_form.object.image.attached?
+                = image_tag photo_form.object.image, width: 100, class: 'mt-2'
+              .mt-2
+                = photo_form.check_box :_destroy, class: 'form-check-input'
+                = photo_form.label :_destroy, 'Eliminar imagen', class: 'form-check-label'
+
+        = link_to "new", new_building_photo_path(@building), class: 'btn btn-info mb-3'
+        .actions
+          = form.submit 'Guardar', class: 'btn btn-primary'
