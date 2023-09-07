@@ -1,5 +1,7 @@
 h1 Home
 .container-fluid
   .row
+    = paginate @builds
     - @builds.each do |build|
       = render partial: "card", locals: { building: build }
+    = paginate @builds

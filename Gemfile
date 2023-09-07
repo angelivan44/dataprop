@@ -74,3 +74,5 @@ end
 gem "devise", "~> 4.9"
 gem "slim-rails"
 gem 'sass-rails', '>= 6'
+gem 'ransack'
+gem 'kaminari'
