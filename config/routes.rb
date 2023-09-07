@@ -7,5 +7,9 @@ Rails.application.routes.draw do
   root to: "buildings#home"
   resources :buildings do
     get 'home', on: :collection
+    resources :photos do
+      get 'photo_modal'
+    end
   end
+
 end

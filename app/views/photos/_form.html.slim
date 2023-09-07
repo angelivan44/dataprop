@@ -1,0 +1,20 @@
+= form_with(model: [@building, @photo]) do |form|
+  - if @photo.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@photo.errors.count, "error")
+        |  prohibited this photo from being saved:
+      ul
+        - @photo.errors.full_messages.each do |message|
+          li= message
+
+  .field
+    = form.label :priority
+    = form.number_field :priority
+
+  .field
+    = form.label :image
+    = form.file_field :image
+
+  .actions
+    = form.submit

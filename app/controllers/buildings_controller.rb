@@ -1,5 +1,6 @@
 class BuildingsController < ApplicationController
-  before_action :set_building, only: [:show, :edit, :update, :destroy]
+  before_action :set_building, only: [:show, :edit,  :update, :destroy]
+  before_action :set_photos, only: [:edit, :show]
   before_action :authenticate_user!, except: :home
 
   def index
@@ -26,8 +27,10 @@ class BuildingsController < ApplicationController
   end
 
   def edit
+    @photos = Photo.where(building_id: params[:id])
+    p "---"*100
+    p @photos
   end
-
   def update
     if @building.update(building_params)
       redirect_to @building, notice: 'Building was successfully updated.'
@@ -45,6 +48,10 @@ class BuildingsController < ApplicationController
 
   def set_building
     @building = Building.find(params[:id])
+  end
+
+  def set_photos
+    @photos = Photo.where(building_id: params[:id])
   end
 
   def building_params
