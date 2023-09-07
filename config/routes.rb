@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root to: "buildings#index"
-  resources :buildings
+  root to: "buildings#home"
+  resources :buildings do
+    get 'home', on: :collection
+  end
 end

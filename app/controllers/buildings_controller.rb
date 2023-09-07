@@ -1,7 +1,12 @@
 class BuildingsController < ApplicationController
   before_action :set_building, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: :home
 
   def index
+    @builds = Building.where(user_id: current_user.id)
+  end
+
+  def home
     @builds = Building.all
   end
 

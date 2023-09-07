@@ -20,3 +20,8 @@ table
           | |
           = button_to 'Delete', building_path(build), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-class'
 = link_to 'New Building', new_building_path
+- if current_user
+  = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'button-class'
+-else
+  = link_to "login", new_user_session_path
+
