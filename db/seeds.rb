@@ -18,10 +18,12 @@ require 'open-uri'
   )
 end
 
+p "usuarios creados"
 # Creando edificios para cada usuario
 User.all.each do |user|
   5.times do
-    building = Building.create!(
+    # Creando el edificio sin guardarlo aún en la base de datos
+    building = Building.new(
       transaction_type: ["Venta", "Arriendo"].sample,
       price: Faker::Commerce.price(range: 100_000.0..1_000_000.0, as_string: false),
       address: Faker::Address.street_address,
@@ -31,12 +33,11 @@ User.all.each do |user|
       user_id: user.id
     )
 
-    # Creando fotos para el edificio
+    # Construyendo las 3 fotos para el edificio
     3.times do
-      photo = Photo.create!(
+      photo = building.photos.build(
         priority: Faker::Number.between(from: 1, to: 10),
-        primary: false,
-        building_id: building.id
+        primary: false
       )
 
       # Adjuntando una imagen ficticia usando Active Storage
@@ -44,5 +45,10 @@ User.all.each do |user|
       file = URI.open(image_url)
       photo.image.attach(io: file, filename: "placeholder.png", content_type: "image/png")
     end
+
+    # Guardando el edificio y sus fotos en la base de datos
+    building.save!
+    p "creado!!"
   end
 end
+
