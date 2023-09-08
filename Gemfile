@@ -76,3 +76,4 @@ gem "slim-rails"
 gem 'sass-rails', '>= 6'
 gem 'ransack'
 gem 'kaminari'
+gem 'cancancan'

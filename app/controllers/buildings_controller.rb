@@ -1,9 +1,10 @@
 class BuildingsController < ApplicationController
-  before_action :set_building, only: [:show, :edit,  :update, :destroy]
-  before_action :set_photos, only: [:edit, :show]
-  before_action :authenticate_user!, except: [:home, :show]
+    load_and_authorize_resource
+    before_action :set_building, only: [:show, :edit,  :update, :destroy]
+    before_action :set_photos, only: [:edit, :show]
+    before_action :authenticate_user!, except: [:home, :show]
 
-  def index
+    def index
     @q = Building.where(user_id: current_user.id).ransack(params[:q])
     @builds = @q.result(distinct: true).page(params[:page]).per(8)
   end

@@ -26,7 +26,7 @@
       p
         strong Bathroom Count:
         = @building.bathroom_count
-      - if current_user
+      - if can? :edit, @building
         = link_to 'Edit', edit_building_path(@building), class: 'btn btn-primary mr-2'
       - if current_user
         = link_to 'Back', buildings_path, class: 'btn btn-secondary'
