@@ -48,13 +48,15 @@ Este documento proporciona instrucciones para configurar y ejecutar la aplicaci�
 Para desplegar la aplicación, simplemente realiza un push a la rama `main`:
 ```bash
 git push origin main
-```
+```[Gemfile](Gemfile)
 ## URL de despliegue
 
 Para desplegar la aplicación, simplemente realiza un push a la rama `main`:
 ```bash
 https://dataprop-i0tx.onrender.com/
 ```
+## Diagrama Entidad Relacion
+
 
 ## ERD
 ![Dataprop](https://github.com/angelivan44/dataprop/assets/63087240/c80eb77f-d7da-4af8-af26-f950c72493c7)
