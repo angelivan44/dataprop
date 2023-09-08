@@ -1,24 +1,57 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
 
-Things you may want to cover:
+Este documento proporciona instrucciones para configurar y ejecutar la aplicación localmente, así como información sobre cómo desplegarla.
 
-* Ruby version
+## Requisitos previos
 
-* System dependencies
+- Ruby `3.0.5`
+- postgres
 
-* Configuration
+## Configuración local
 
-* Database creation
+1. **Clona el repositorio**:
+    ```bash
+    git clone [URL_del_repositorio]
+    ```
 
-* Database initialization
+2. **Instala las gemas**:
+    ```bash
+    bundle install
+    ```
 
-* How to run the test suite
+3. **Configuración del entorno**:
+   (Explica cualquier archivo o variable de entorno que necesite ser configurada.)
 
-* Services (job queues, cache servers, search engines, etc.)
+4. **Creación de la base de datos**:
+    ```bash
+    rails db:create
+    rails db:migrate
+    ```
 
-* Deployment instructions
+5. **Inicialización de la base de datos**:
+   ```bash
+    rails db:seed
+    ```
 
-* ...
+6. **Ejecución local**:
+    ```bash
+    rails server
+    ```
+
+   Navega a `http://localhost:3000` en tu navegador para ver la aplicación en acción.
+
+#
+## Instrucciones de despliegue
+
+Para desplegar la aplicación, simplemente realiza un push a la rama `main`:
+```bash
+git push origin main
+```
+## URL de despliegue
+
+Para desplegar la aplicación, simplemente realiza un push a la rama `main`:
+```bash
+https://dataprop-i0tx.onrender.com/
+```
