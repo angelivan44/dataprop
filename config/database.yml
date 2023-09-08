@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: dataprop_production
-  username: dataprop
-  password: <%= ENV["DATAPROP_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
