@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
       format.js   { head :forbidden, content_type: 'text/html' }
     end
   end
+  rescue_from ActiveSupport::MessageEncryptor::InvalidMessage do
+    reset_session
+    redirect_to root_path
+  end
   protected
 
   def configure_permitted_parameters
