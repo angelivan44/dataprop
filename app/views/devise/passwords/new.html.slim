@@ -1,0 +1,12 @@
+.d-flex.justify-content-start
+  .p-5.bg-form-login
+    h2
+      | Forgot your password?
+    = form_for(resource, as: resource_name,html: {'data-turbo' => "false"}, url: password_path(resource_name), html: { method: :post }) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .form-floating.mb-3
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+        = f.label :email, class:"form-label"
+      .actions
+        = f.submit "Send me reset password instructions" , class: "btn btn-primary"
+    = render "devise/shared/links"
