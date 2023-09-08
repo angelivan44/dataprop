@@ -77,3 +77,5 @@ gem 'sass-rails', '>= 6'
 gem 'ransack'
 gem 'kaminari'
 gem 'cancancan'
+gem 'aws-sdk-s3', require: false
+gem 'dotenv-rails'
