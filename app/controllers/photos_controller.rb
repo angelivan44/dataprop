@@ -56,7 +56,7 @@ class PhotosController < ApplicationController
 
   def change_primary
     old_image_primary = @building.photos.find_by(primary: true)
-    return if old_image_primary.id == params[:id]
+    return if old_image_primary&.id == params[:id] or old_image_primary.nil?
     old_image_primary.primary = false
     old_image_primary.save
   end

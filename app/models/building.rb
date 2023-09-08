@@ -11,6 +11,8 @@ class Building < ApplicationRecord
   private
 
   def at_least_three_photos
-    errors.add(:photos, "there must be at least 3 ") if photos.size < 3
+    if photos.size < 3
+      errors.add(:photos, "deben ser al menos 3")
+    end
   end
 end

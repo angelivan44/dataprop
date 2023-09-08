@@ -15,7 +15,8 @@
   .form-group
     = form.label :primary, class: 'form-check-label'
     .form-check
-      = form.check_box :primary, class: 'form-check-input'
+      = form.check_box :primary, class: 'form-check-input', disabled: (form.object.primary? ? true : false)
+
   .form-group
     = form.label :image, class: 'form-label'
     = form.file_field :image, id: 'image-input', class: 'form-control mt-2'
